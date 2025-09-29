@@ -334,7 +334,6 @@ function App() {
   const [preferences, setPreferences] = useState({});
   const [currentPage, setCurrentPage] = useState('home');
   const [showSummary, setShowSummary] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   // Carica preferenze salvate all'avvio
   useEffect(() => {
@@ -515,8 +514,6 @@ function App() {
 
   // Funzione per gestire il download diretto del PDF
   const handleDownloadPdf = (categoryName) => {
-    setIsLoading(true);
-    
     try {
       const fileName = generateAndDownloadPdf(categoryName);
       
@@ -524,8 +521,6 @@ function App() {
     } catch (error) {
       console.error('Errore durante il download:', error);
       alert('❌ Si è verificato un errore durante il download. Riprova.');
-    } finally {
-      setIsLoading(false);
     }
   };
 
