@@ -447,6 +447,36 @@ function App() {
     return Object.keys(preferences).filter(key => preferences[key] !== undefined).length;
   };
 
+  // Funzione per pulire caratteri speciali per PDF
+  const cleanTextForPdf = (text) => {
+    if (!text) return '';
+    
+    // Sostituisci emoji comuni
+    let cleanText = text
+      .replace(/💭/g, 'NOTE:')
+      .replace(/🌸/g, '(sakura)')
+      .replace(/🗻/g, '(Mt.Fuji)')
+      .replace(/⛩️/g, '(tempio)')
+      .replace(/🏙️/g, '(citta)')
+      .replace(/🎪/g, '(parco)');
+    
+    // Sostituisci caratteri accentati comuni
+    const accents = {
+      'à': 'a', 'è': 'e', 'é': 'e', 'ì': 'i', 'ò': 'o', 'ù': 'u',
+      'À': 'A', 'È': 'E', 'É': 'E', 'Ì': 'I', 'Ò': 'O', 'Ù': 'U',
+      'ā': 'a', 'ō': 'o', 'ū': 'u'
+    };
+    
+    Object.keys(accents).forEach(accent => {
+      cleanText = cleanText.replace(new RegExp(accent, 'g'), accents[accent]);
+    });
+    
+    // Rimuovi altri caratteri non-ASCII rimanenti
+    cleanText = cleanText.replace(/[^\u0000-\u007F]/g, '');
+    
+    return cleanText.trim();
+  };
+
   // Funzione per generare e scaricare PDF
   const generateAndDownloadPdf = (categoryName) => {
     const currentDate = new Date().toLocaleDateString('it-IT');
@@ -548,14 +578,17 @@ function App() {
         
         doc.setFontSize(12);
         doc.setFont('helvetica', 'bold');
-        doc.text('💭 Note personali:', margin, yPosition);
+        doc.text('NOTE PERSONALI:', margin, yPosition);
         yPosition += 8;
         
         doc.setFontSize(10);
         doc.setFont('helvetica', 'normal');
         
-        // Dividi il commento in righe per adattarlo alla pagina
-        const lines = doc.splitTextToSize(comment, pageWidth - (margin * 2));
+        // Pulisci il commento dai caratteri speciali
+        const cleanedComment = cleanTextForPdf(comment);
+        
+        // Dividi il commento pulito in righe per adattarlo alla pagina
+        const lines = doc.splitTextToSize(cleanedComment, pageWidth - (margin * 2));
         lines.forEach(line => {
           if (yPosition > 270) {
             doc.addPage();
