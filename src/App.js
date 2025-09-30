@@ -756,7 +756,7 @@ function App() {
             ✨ Le Mie Scelte ({getPreferenceCount()})
           </button>
           <button className="reset-button" onClick={resetPreferences}>
-            �️ Ricomincia
+            Ricomincia
           </button>
         </div>
       </header>
