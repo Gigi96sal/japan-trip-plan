@@ -224,6 +224,7 @@ function SummaryModal({ preferences, onClose }) {
 // Componente per una singola pagina categoria con navigazione sequenziale
 function CategoryPage({ category, preferences, comments, onPreferenceChange, onCommentChange, onBack, onDownloadPdf }) {
   const [currentSubcategoryIndex, setCurrentSubcategoryIndex] = useState(0);
+  const [showInfoModal, setShowInfoModal] = useState(false);
   const content = itinerary[category];
   
   // Se il contenuto è un array, trattalo come una singola sottocategoria
@@ -319,7 +320,16 @@ function CategoryPage({ category, preferences, comments, onPreferenceChange, onC
             const color = getProgressColor(completed, total);
             return (
               <div className="completion-bar-header">
-                <span>Progresso</span>
+                <div className="progress-label-container">
+                  <span>Progresso</span>
+                  <button 
+                    className="info-button" 
+                    onClick={() => setShowInfoModal(true)}
+                    title="Informazioni scala valutazione"
+                  >
+                    ℹ️
+                  </button>
+                </div>
                 <span style={{ color }}>
                   {completed}/{total}
                 </span>
@@ -346,6 +356,53 @@ function CategoryPage({ category, preferences, comments, onPreferenceChange, onC
         
         {/* Sezione completamento rimossa - ora il pulsante è nella navigazione */}
       </div>
+
+      {/* Modale informazioni scala valutazione */}
+      {showInfoModal && (
+        <div className="info-modal-overlay" onClick={() => setShowInfoModal(false)}>
+          <div className="info-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>Scala di Valutazione delle Preferenze</h3>
+              <button 
+                className="close-button" 
+                onClick={() => setShowInfoModal(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <div className="modal-content">
+              <div className="rating-item">
+                <span className="rating-number">0</span>
+                <div className="rating-description">
+                  <strong>Esclusione</strong><br/>
+                  <span>Attrazione non di interesse</span>
+                </div>
+              </div>
+              <div className="rating-item">
+                <span className="rating-number">1</span>
+                <div className="rating-description">
+                  <strong>Opzionale</strong><br/>
+                  <span>Considerazione in caso di disponibilità residua</span>
+                </div>
+              </div>
+              <div className="rating-item">
+                <span className="rating-number">2</span>
+                <div className="rating-description">
+                  <strong>Desiderabile</strong><br/>
+                  <span>Forte interesse per la visita</span>
+                </div>
+              </div>
+              <div className="rating-item">
+                <span className="rating-number">3</span>
+                <div className="rating-description">
+                  <strong>Prioritaria</strong><br/>
+                  <span>Tappa imprescindibile nell'itinerario</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Navigazione sottocategorie */}
       <div className="subcategory-navigation">
