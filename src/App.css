@@ -674,6 +674,30 @@ h3 {
   font-weight: 400;
 }
 
+.sakura-decoration {
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 16px;
+  animation: sakuraFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 2px 8px rgba(255, 182, 193, 0.4));
+}
+
+@keyframes sakuraFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(5deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .sakura-decoration {
+    font-size: 2em;
+    margin-bottom: 12px;
+  }
+}
+
 .category-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

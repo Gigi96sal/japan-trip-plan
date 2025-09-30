@@ -160,6 +160,7 @@ function HomePage({ onPageChange, preferences }) {
   return (
     <div className="home-page">
       <div className="welcome-section">
+        <div className="sakura-decoration">🌸</div>
         <h2>Benvenuto nel tuo viaggio in Giappone! 🇯🇵</h2>
         <p>Seleziona una categoria per iniziare a pianificare</p>
       </div>
@@ -689,16 +690,16 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>🗾 Viaggio in Giappone</h1>
+        <h1>Viaggio in Giappone</h1>
         <div className="header-buttons">
           <button 
             className="summary-header-button" 
             onClick={() => setShowSummary(true)}
           >
-            📊 Preferenze ({getPreferenceCount()})
+            ✨ Le Mie Scelte ({getPreferenceCount()})
           </button>
           <button className="reset-button" onClick={resetPreferences}>
-            🔄 Reset
+            �️ Ricomincia
           </button>
         </div>
       </header>
