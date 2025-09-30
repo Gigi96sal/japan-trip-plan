@@ -362,7 +362,7 @@ function CategoryPage({ category, preferences, comments, onPreferenceChange, onC
             className="confirm-btn"
             onClick={() => onDownloadPdf(category)}
           >
-            ✅ Conferma
+            📄 Scarica PDF
           </button>
         ) : (
           <div className="completion-status">
