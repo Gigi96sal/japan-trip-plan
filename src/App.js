@@ -472,7 +472,7 @@ function App() {
     });
     
     // Rimuovi altri caratteri non-ASCII rimanenti
-    cleanText = cleanText.replace(/[^\u0000-\u007F]/g, '');
+    cleanText = cleanText.replace(/[^\u0020-\u007F]/g, '');
     
     return cleanText.trim();
   };
