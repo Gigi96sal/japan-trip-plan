@@ -39,7 +39,9 @@ function MobileNav({ currentPage, onPageChange }) {
   const pages = [
     { key: 'home', title: 'Menu', icon: '🏠' },
     { key: 'Tokyo', title: 'Tokyo', icon: '🏙️' },
-    { key: 'Kyōto', title: 'Kyoto', icon: '⛩️' }
+    { key: 'Kyōto', title: 'Kyoto', icon: '⛩️' },
+    { key: 'MonteFuji e Dintorni di Tokyo', title: 'Mt.Fuji', icon: '🗻' },
+    { key: 'Honshu Centrale', title: 'Honshu', icon: '🎪' }
   ];
 
   return (
@@ -110,6 +112,20 @@ function HomePage({ onPageChange, preferences }) {
       icon: '⛩️',
       description: 'Templi e tradizioni di Kyoto',
       color: '#34C759'
+    },
+    {
+      key: 'MonteFuji e Dintorni di Tokyo',
+      title: 'Monte Fuji',
+      icon: '🗻',
+      description: 'Monte Fuji e dintorni',
+      color: '#FF9500'
+    },
+    {
+      key: 'Honshu Centrale',
+      title: 'Honshu Centrale',
+      icon: '🎪',
+      description: 'Nagoya e Parco Ghibli',
+      color: '#AF52DE'
     }
   ];
 
