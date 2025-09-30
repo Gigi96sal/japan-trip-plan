@@ -58,6 +58,42 @@ function MobileNav({ currentPage, onPageChange }) {
   );
 }
 
+// Componente per la sezione commenti
+function CommentsSection({ subcategoryKey, comment, onCommentChange }) {
+  const [localComment, setLocalComment] = useState(comment || '');
+
+  const handleSave = () => {
+    onCommentChange(subcategoryKey, localComment);
+  };
+
+  const handleTextChange = (e) => {
+    setLocalComment(e.target.value);
+  };
+
+  return (
+    <div className="comments-section">
+      <h4 className="comments-title">💭 Note personali</h4>
+      <textarea
+        className="comments-input"
+        value={localComment}
+        onChange={handleTextChange}
+        placeholder="Aggiungi qui le tue note personali per questa sezione... (es. orari preferiti, preferenze speciali, ricordi da conservare)"
+        rows={4}
+      />
+      <button 
+        className="comments-save-btn"
+        onClick={handleSave}
+        disabled={localComment === (comment || '')}
+      >
+        💾 Salva note
+      </button>
+      {comment && (
+        <p className="comments-saved-indicator">✅ Note salvate</p>
+      )}
+    </div>
+  );
+}
+
 // Componente per la homepage/menu principale
 function HomePage({ onPageChange, preferences }) {
   const categories = [
@@ -169,7 +205,7 @@ function SummaryModal({ preferences, onClose }) {
 // Modal di conferma rimosso - ora usiamo il pulsante diretto nella navigazione
 
 // Componente per una singola pagina categoria con navigazione sequenziale
-function CategoryPage({ category, preferences, onPreferenceChange, onBack, onDownloadPdf }) {
+function CategoryPage({ category, preferences, comments, onPreferenceChange, onCommentChange, onBack, onDownloadPdf }) {
   const [currentSubcategoryIndex, setCurrentSubcategoryIndex] = useState(0);
   const content = itinerary[category];
   
@@ -284,6 +320,13 @@ function CategoryPage({ category, preferences, onPreferenceChange, onBack, onDow
           />
         ))}
         
+        {/* Sezione commenti per la sottocategoria corrente */}
+        <CommentsSection
+          subcategoryKey={`${category}-${currentSubcategory.title}`}
+          comment={comments[`${category}-${currentSubcategory.title}`]}
+          onCommentChange={onCommentChange}
+        />
+        
         {/* Sezione completamento rimossa - ora il pulsante è nella navigazione */}
       </div>
 
@@ -332,14 +375,20 @@ function CategoryPage({ category, preferences, onPreferenceChange, onBack, onDow
 
 function App() {
   const [preferences, setPreferences] = useState({});
+  const [comments, setComments] = useState({});
   const [currentPage, setCurrentPage] = useState('home');
   const [showSummary, setShowSummary] = useState(false);
 
-  // Carica preferenze salvate all'avvio
+  // Carica preferenze e commenti salvati all'avvio
   useEffect(() => {
     const savedPreferences = localStorage.getItem('japan-trip-preferences');
     if (savedPreferences) {
       setPreferences(JSON.parse(savedPreferences));
+    }
+    
+    const savedComments = localStorage.getItem('japan-trip-comments');
+    if (savedComments) {
+      setComments(JSON.parse(savedComments));
     }
   }, []);
 
@@ -350,10 +399,24 @@ function App() {
     }
   }, [preferences]);
 
+  // Salva commenti ogni volta che cambiano (solo se non è vuoto)
+  useEffect(() => {
+    if (Object.keys(comments).length > 0) {
+      localStorage.setItem('japan-trip-comments', JSON.stringify(comments));
+    }
+  }, [comments]);
+
   const handlePreferenceChange = (activityName, value) => {
     setPreferences(prev => ({
       ...prev,
       [activityName]: value
+    }));
+  };
+
+  const handleCommentChange = (subcategoryKey, commentText) => {
+    setComments(prev => ({
+      ...prev,
+      [subcategoryKey]: commentText
     }));
   };
 
@@ -455,6 +518,38 @@ function App() {
         yPosition += 6;
       });
       
+      // Aggiungi commenti per questa sottocategoria se esistono
+      const commentKey = `${categoryName}-${subcategoryName}`;
+      const comment = comments[commentKey];
+      if (comment && comment.trim()) {
+        yPosition += 5;
+        
+        // Controlla se serve nuova pagina per i commenti
+        if (yPosition > 240) {
+          doc.addPage();
+          yPosition = 30;
+        }
+        
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.text('💭 Note personali:', margin, yPosition);
+        yPosition += 8;
+        
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'normal');
+        
+        // Dividi il commento in righe per adattarlo alla pagina
+        const lines = doc.splitTextToSize(comment, pageWidth - (margin * 2));
+        lines.forEach(line => {
+          if (yPosition > 270) {
+            doc.addPage();
+            yPosition = 30;
+          }
+          doc.text(line, margin + 5, yPosition);
+          yPosition += 5;
+        });
+      }
+      
       yPosition += 5;
     });
     
@@ -532,7 +627,9 @@ function App() {
         <CategoryPage
           category={currentPage}
           preferences={preferences}
+          comments={comments}
           onPreferenceChange={handlePreferenceChange}
+          onCommentChange={handleCommentChange}
           onBack={() => setCurrentPage('home')}
           onDownloadPdf={handleDownloadPdf}
         />

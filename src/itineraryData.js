@@ -87,4 +87,15 @@ export const itinerary = {
         { name: "Tofuku-ji" },
     ],
   },
+    "MonteFuji e Dintorni di Tokyo": {
+    "Monte Fuji": [
+        { name: "Stazione di Shimo-Yoshida e Pagoda di Churei-to" },
+        { name: "Funivia Kachi-kachi Yama" },
+    ],
+  },
+    "Honshu Centrale": {
+    "Nagoya": [
+        { name: "Parco Ghibli (Biglietti da prendere 90 giorni prima, sono molto richiesti)" },
+    ],
+  }
 };
