@@ -39,8 +39,9 @@ function MobileNav({ currentPage, onPageChange }) {
   const pages = [
     { key: 'home', title: 'Menu', icon: '🏠' },
     { key: 'Tokyo', title: 'Tokyo', icon: '🏙️' },
+    { key: 'Dintorni di Tokyo', title: 'Dintorni', icon: '🗻' },
     { key: 'Kyōto', title: 'Kyoto', icon: '⛩️' },
-    { key: 'Honshū centrale e Alpi giapponesi', title: 'Honshu', icon: '🗻' },
+    { key: 'Honshū centrale e Alpi giapponesi', title: 'Honshu', icon: '🏔️' },
     { key: 'Osaka', title: 'Osaka', icon: '🍜' },
     { key: 'Kobe', title: 'Kobe', icon: '🥩' },
     { key: 'Nara', title: 'Nara', icon: '🦌' },
@@ -110,6 +111,13 @@ function HomePage({ onPageChange, preferences }) {
       color: '#007AFF'
     },
     {
+      key: 'Dintorni di Tokyo',
+      title: 'Dintorni di Tokyo',
+      icon: '🗻',
+      description: 'Monte Fuji e aree vicine',
+      color: '#FF9500'
+    },
+    {
       key: 'Kyōto',
       title: 'Kyoto',
       icon: '⛩️',
@@ -119,9 +127,9 @@ function HomePage({ onPageChange, preferences }) {
     {
       key: 'Honshū centrale e Alpi giapponesi',
       title: 'Honshu Centrale',
-      icon: '🗻',
+      icon: '🏔️',
       description: 'Nagoya e Parco Ghibli',
-      color: '#FF9500'
+      color: '#8E44AD'
     },
     {
       key: 'Osaka',
@@ -149,7 +157,7 @@ function HomePage({ onPageChange, preferences }) {
       title: 'Miyajima',
       icon: '⛩️',
       description: 'Isola sacra e torii galleggiante',
-      color: '#FF9500'
+      color: '#FF6B35'
     }
   ];
 

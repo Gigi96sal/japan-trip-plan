@@ -80,7 +80,9 @@ export const itinerary = {
     ],
     "Odaiba e la baia di Tokyo": [
       { name: "Centri commerciali e attrazioni varie (vedi Maps)" },
-    ],
+    ]
+  },
+  "Dintorni di Tokyo": {
     "Monte Fuji e dintorni di Tokyo": [
       { name: "Stazione di Shimoyoshida e Pagoda di Chūrei-tō" },
       { name: "Funivia Kachi-Kachi Yama" },
