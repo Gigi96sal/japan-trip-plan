@@ -40,8 +40,11 @@ function MobileNav({ currentPage, onPageChange }) {
     { key: 'home', title: 'Menu', icon: '🏠' },
     { key: 'Tokyo', title: 'Tokyo', icon: '🏙️' },
     { key: 'Kyōto', title: 'Kyoto', icon: '⛩️' },
-    { key: 'MonteFuji e Dintorni di Tokyo', title: 'Mt.Fuji', icon: '🗻' },
-    { key: 'Honshu Centrale', title: 'Honshu', icon: '🎪' }
+    { key: 'Honshū centrale e Alpi giapponesi', title: 'Honshu', icon: '🗻' },
+    { key: 'Osaka', title: 'Osaka', icon: '🍜' },
+    { key: 'Kobe', title: 'Kobe', icon: '🥩' },
+    { key: 'Nara', title: 'Nara', icon: '🦌' },
+    { key: 'Miyajima', title: 'Miyajima', icon: '⛩️' }
   ];
 
   return (
@@ -114,18 +117,39 @@ function HomePage({ onPageChange, preferences }) {
       color: '#34C759'
     },
     {
-      key: 'MonteFuji e Dintorni di Tokyo',
-      title: 'Monte Fuji',
+      key: 'Honshū centrale e Alpi giapponesi',
+      title: 'Honshu Centrale',
       icon: '🗻',
-      description: 'Monte Fuji e dintorni',
+      description: 'Nagoya e Parco Ghibli',
       color: '#FF9500'
     },
     {
-      key: 'Honshu Centrale',
-      title: 'Honshu Centrale',
-      icon: '🎪',
-      description: 'Nagoya e Parco Ghibli',
+      key: 'Osaka',
+      title: 'Osaka',
+      icon: '🍜',
+      description: 'Cibo, shopping e divertimento',
       color: '#AF52DE'
+    },
+    {
+      key: 'Kobe',
+      title: 'Kobe',
+      icon: '🥩',
+      description: 'Porto e quartiere straniero',
+      color: '#FF2D55'
+    },
+    {
+      key: 'Nara',
+      title: 'Nara',
+      icon: '🦌',
+      description: 'Cervi e templi antichi',
+      color: '#5AC8FA'
+    },
+    {
+      key: 'Miyajima',
+      title: 'Miyajima',
+      icon: '⛩️',
+      description: 'Isola sacra e torii galleggiante',
+      color: '#FF9500'
     }
   ];
 

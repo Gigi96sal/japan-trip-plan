@@ -641,9 +641,12 @@ h3 {
   border-top: 1px solid rgba(99, 99, 102, 0.3);
   display: flex;
   justify-content: space-around;
-  padding: 8px 5px 20px 5px;
+  padding: 8px 2px 20px 2px;
   z-index: 1000;
   box-shadow: 0 -1px 40px rgba(0, 0, 0, 0.3);
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 2px;
 }
 
 @media (min-width: 769px) {
@@ -656,14 +659,16 @@ h3 {
   background: none;
   border: none;
   color: #8E8E93;
-  padding: 8px 4px;
-  border-radius: 12px;
+  padding: 6px 3px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 60px;
+  flex: 0 0 auto;
+  min-width: 45px;
+  max-width: 50px;
   position: relative;
   -webkit-tap-highlight-color: transparent;
 }
@@ -680,14 +685,18 @@ h3 {
 }
 
 .nav-icon {
-  font-size: 1.4em;
+  font-size: 1.2em;
   margin-bottom: 2px;
 }
 
 .nav-text {
-  font-size: 0.7em;
+  font-size: 0.65em;
   font-weight: 500;
   letter-spacing: -0.1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .preference-count {
